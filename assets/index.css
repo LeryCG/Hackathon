@@ -1,27 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400&display=swap");
 
-/* ------------------------------
-   RESET Y BODY
---------------------------------*/
+/* RESET Y BODY */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: "Poppins", sans-serif;
   color: #fff;
   background: radial-gradient(circle at center, #0b0c10 35%, #050608 100%);
   overflow-x: hidden;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* ------------------------------
-   ESCENA PRINCIPAL
---------------------------------*/
+/* ESCENA PRINCIPAL */
 main.scene {
   text-align: center;
   flex: 1;
@@ -31,33 +26,20 @@ main.scene {
   align-items: center;
   gap: 1.5rem;
   padding: 2rem;
-  animation: sceneZoom 15s ease-in-out infinite alternate;
+  transform-origin: center center;
+  transition: transform 0.1s ease-out;
 }
 
-@keyframes sceneZoom {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* ------------------------------
-   FONDO ESTRELLADO
---------------------------------*/
+/* FONDO ESTRELLADO Y NEBULA */
 .stars,
 .twinkling,
-.nebula {
+.nebula,
+.planets {
   position: fixed;
   top: 0;
   left: 0;
   width: 200%;
   height: 200%;
-  display: block;
   z-index: -2;
 }
 
@@ -65,17 +47,15 @@ main.scene {
   background: transparent
     url("https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/stars.png")
     repeat top center;
-  animation: moveStars 400s linear infinite;
+  animation: moveStars 200s linear infinite;
 }
-
 .twinkling {
   background: transparent
     url("https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/twinkling.png")
     repeat top center;
-  animation: moveTwinkling 600s linear infinite;
-  opacity: 0.4;
+  animation: moveTwinkling 300s linear infinite;
+  opacity: 0.5;
 }
-
 .nebula {
   background: radial-gradient(
       circle at 30% 30%,
@@ -85,7 +65,6 @@ main.scene {
     radial-gradient(circle at 70% 60%, rgba(255, 0, 178, 0.1), transparent 50%);
   animation: nebulaMove 60s linear infinite;
 }
-
 @keyframes nebulaMove {
   0% {
     transform: translate(0, 0);
@@ -98,80 +77,7 @@ main.scene {
   }
 }
 
-/* ------------------------------
-   PLANETAS
---------------------------------*/
-.planets {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.planet {
-  position: absolute;
-  width: 80px;
-  animation: planetMove 20s linear infinite;
-}
-
-.planet:nth-child(2) {
-  width: 50px;
-}
-
-@keyframes planetMove {
-  0% {
-    transform: translateY(calc(var(--i) * 50px)) translateX(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(calc(var(--i) * 50px + 20px)) translateX(30px)
-      rotate(15deg);
-  }
-  100% {
-    transform: translateY(calc(var(--i) * 50px)) translateX(0) rotate(0deg);
-  }
-}
-
-/* ------------------------------
-   ESTRELLAS FUGACES
---------------------------------*/
-.dynamic-stars {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.dynamic-star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(0, 0) rotate(20deg);
-  animation: shootingStar linear forwards;
-}
-
-@keyframes shootingStar {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(20deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--x-end), var(--y-end)) rotate(20deg);
-  }
-}
-
-/* ------------------------------
-   TEXTO
---------------------------------*/
+/* TEXTO */
 .title {
   font-family: "Orbitron", sans-serif;
   font-size: 7rem;
@@ -180,25 +86,21 @@ main.scene {
   animation: glowText 3s ease-in-out infinite alternate;
   margin-bottom: 0;
 }
-
 .subtitle {
   font-size: 3rem;
   letter-spacing: 2px;
   color: #fff;
   animation: fadeIn 2s ease-in;
-  margin-top: 0.2rem;
-  margin-bottom: 1.5rem;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
 }
 
-/* ------------------------------
-   UFO + VACA + HAZ
---------------------------------*/
+/* UFO + VACA + HAZ */
 .abduction {
   position: relative;
   width: 200px;
   height: 300px;
 }
-
 .ufo {
   width: 180px;
   position: absolute;
@@ -209,23 +111,9 @@ main.scene {
     ufoZoom 4s ease-in-out infinite alternate;
   transition: filter 0.3s ease;
 }
-
 .ufo:hover {
-  filter: drop-shadow(0 0 40px rgba(0, 255, 178, 1)) brightness(1.3);
+  filter: drop-shadow(0 0 35px rgba(0, 255, 178, 1));
 }
-
-@keyframes ufoZoom {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.05);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
 .beam {
   position: absolute;
   top: 60px;
@@ -239,29 +127,10 @@ main.scene {
   filter: blur(2px);
   animation: beamPulse 1.8s ease-in-out infinite alternate,
     beamZoom 2s ease-in-out infinite alternate;
-  transition: opacity 0.3s ease, filter 0.3s ease;
 }
-
-@keyframes beamZoom {
-  0% {
-    transform: translateX(-50%) scaleY(1);
-    opacity: 0.25;
-  }
-  50% {
-    transform: translateX(-50%) scaleY(1.1);
-    opacity: 0.4;
-  }
-  100% {
-    transform: translateX(-50%) scaleY(1);
-    opacity: 0.25;
-  }
-}
-
 .abduction:hover .beam {
   animation: beamPulseHover 1s ease-in-out infinite alternate;
-  opacity: 0.8;
 }
-
 .cow {
   width: 100px;
   position: absolute;
@@ -272,25 +141,21 @@ main.scene {
     cowZoom 4s ease-in-out infinite alternate;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-
 .cow:hover {
   transform: translateX(-50%) translateY(-5px) rotate(-2deg);
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
 }
 
-/* ------------------------------
-   MENSAJE Y BOTÓN
---------------------------------*/
+/* MENSAJE Y BOTÓN */
 .message {
   max-width: 500px;
   font-size: 1.1rem;
   line-height: 1.5;
   color: #e5e5e5;
   animation: fadeInUp 2s ease;
-  margin-top: 1.5rem;
-  margin-bottom: 0.8rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
-
 .home-btn {
   display: inline-block;
   padding: 0.8rem 1.8rem;
@@ -303,38 +168,17 @@ main.scene {
   transition: all 0.25s ease;
   animation: buttonPulse 2s infinite alternate;
 }
-
-/* --- EFECTO BOTÓN + UFO SINCRONIZADO --- */
 .home-btn:hover {
   background-color: #00dca1;
   box-shadow: 0 0 30px rgba(0, 255, 178, 0.8);
   transform: translateY(-3px) scale(1.08);
 }
-
-.home-btn:hover ~ .abduction .beam {
-  opacity: 0.8;
-  filter: blur(4px) brightness(1.6);
-  animation: beamPulseHover 0.8s ease-in-out infinite alternate;
+.home-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 0 15px rgba(0, 255, 178, 0.5);
 }
 
-.home-btn:hover ~ .abduction .ufo {
-  filter: drop-shadow(0 0 40px rgba(0, 255, 178, 1));
-}
-
-/* --- PULSO BOTÓN --- */
-@keyframes buttonPulse {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 10px rgba(0, 255, 178, 0.5);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 255, 178, 1);
-  }
-}
-
-/* --- FOOTER --- */
+/* FOOTER */
 footer {
   text-align: center;
   padding: 1.5rem 0;
@@ -343,7 +187,7 @@ footer {
   margin-top: auto;
 }
 
-/* --- ANIMACIONES --- */
+/* ANIMACIONES */
 @keyframes moveStars {
   from {
     transform: translateY(0);
@@ -411,252 +255,6 @@ footer {
     transform: translate(-50%, -20px);
   }
 }
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  color: #fff;
-  background: #050608;
-  overflow-x: hidden;
-}
-
-/* ------------------------------
-   SECCIÓN HERO: ABDUCCIÓN
---------------------------------*/
-.hero {
-  position: relative;
-  height: 200vh;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #0b0c10 40%, #050608 100%);
-}
-
-.stars,
-.twinkling,
-.nebula {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  z-index: -2;
-}
-
-.stars {
-  background: transparent
-    url("https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/stars.png")
-    repeat;
-  animation: moveStars 200s linear infinite;
-}
-
-.twinkling {
-  background: transparent
-    url("https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/twinkling.png")
-    repeat;
-  animation: moveTwinkling 300s linear infinite;
-  opacity: 0.5;
-}
-
-.nebula {
-  background: radial-gradient(
-      circle at 30% 30%,
-      rgba(0, 255, 178, 0.15),
-      transparent 60%
-    ),
-    radial-gradient(circle at 70% 60%, rgba(255, 0, 178, 0.1), transparent 60%);
-  animation: nebulaMove 60s linear infinite;
-}
-
-@keyframes moveStars {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-1000px);
-  }
-}
-@keyframes moveTwinkling {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-1000px);
-  }
-}
-@keyframes nebulaMove {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(50px, -30px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-.abduction-scene {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.ufo {
-  width: 180px;
-  filter: drop-shadow(0 0 20px rgba(0, 255, 178, 0.7));
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.beam {
-  width: 0;
-  height: 0;
-  border-left: 70px solid transparent;
-  border-right: 70px solid transparent;
-  border-bottom: 250px solid rgba(0, 255, 178, 0.25);
-  filter: blur(3px);
-  margin-top: -30px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.cow {
-  width: 100px;
-  margin-top: 20px;
-  transition: transform 0.3s ease;
-}
-
-.scroll-hint {
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* ------------------------------
-   PÁGINA 404
---------------------------------*/
-.page-content {
-  background: radial-gradient(circle at center, #0b0c10 35%, #050608 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 1.5rem;
-  padding: 2rem;
-  position: relative;
-  z-index: 2;
-}
-
-.title {
-  font-family: "Orbitron", sans-serif;
-  font-size: 7rem;
-  color: #00ffb2;
-  text-shadow: 0 0 25px rgba(0, 255, 178, 0.9);
-  margin-bottom: 0;
-  animation: glowText 3s ease-in-out infinite alternate;
-}
-
-.subtitle {
-  font-size: 2.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: 2px;
-  color: #fff;
-  animation: fadeIn 2s ease-in;
-}
-
-.message {
-  font-size: 1.2rem;
-  max-width: 480px;
-  color: #ccc;
-  margin-bottom: 1.2rem;
-}
-
-.home-btn {
-  display: inline-block;
-  padding: 0.8rem 1.8rem;
-  color: #0b0c10;
-  background-color: #00ffb2;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 0 15px rgba(0, 255, 178, 0.6);
-  transition: all 0.3s ease;
-}
-
-.home-btn:hover {
-  background-color: #00dca1;
-  box-shadow: 0 0 35px rgba(0, 255, 178, 0.8);
-  transform: scale(1.1);
-}
-
-footer {
-  font-size: 0.9rem;
-  color: #888;
-  margin-top: 2rem;
-}
-
-/* ANIMACIONES EXTRA */
-@keyframes glowText {
-  0% {
-    text-shadow: 0 0 15px rgba(0, 255, 178, 0.4);
-  }
-  100% {
-    text-shadow: 0 0 40px rgba(0, 255, 178, 1);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .title {
-    font-size: 4.5rem;
-  }
-  .subtitle {
-    font-size: 1.4rem;
-  }
-  .ufo {
-    width: 130px;
-  }
-  .cow {
-    width: 80px;
-  }
-}
-
 @keyframes tilt {
   0%,
   100% {
@@ -703,6 +301,15 @@ footer {
   }
   100% {
     text-shadow: 0 0 35px rgba(0, 255, 178, 1);
+  }
+}
+@keyframes buttonPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
   }
 }
 
