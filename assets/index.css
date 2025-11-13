@@ -1,26 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400&display=swap");
 
+/* RESET Y BODY */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #fff;
-  background: radial-gradient(circle at center, #0b0c10 40%, #050608 100%);
+  background: radial-gradient(circle at center, #0b0c10 35%, #050608 100%);
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-/* ------------------------------
-   FONDO ESTRELLADO ANIMADO
---------------------------------*/
-.stars, .twinkling {
+/* ESCENA PRINCIPAL */
+main.scene {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  animation: sceneZoom 15s ease-in-out infinite alternate;
+}
+@keyframes sceneZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* FONDO */
+.stars,
+.twinkling,
+.nebula,
+.planets {
   position: fixed;
   top: 0;
   left: 0;
@@ -29,66 +53,180 @@ body {
   display: block;
   z-index: -2;
 }
-
 .stars {
-  background: transparent url('https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/stars.png') repeat top center;
+  background: transparent
+    url("https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/stars.png")
+    repeat top center;
   animation: moveStars 200s linear infinite;
 }
-
 .twinkling {
-  background: transparent url('https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/twinkling.png') repeat top center;
+  background: transparent
+    url("https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/twinkling.png")
+    repeat top center;
   animation: moveTwinkling 300s linear infinite;
   opacity: 0.5;
 }
-
-/* ------------------------------
-   ESCENA PRINCIPAL
---------------------------------*/
-.scene {
-  text-align: center;
-  margin-top: 5rem;
+.nebula {
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(0, 255, 178, 0.15),
+      transparent 50%
+    ),
+    radial-gradient(circle at 70% 60%, rgba(255, 0, 178, 0.1), transparent 50%);
+  animation: nebulaMove 60s linear infinite;
+}
+@keyframes nebulaMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(50px, -30px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
+.planets {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+.planet {
+  position: absolute;
+  width: 80px;
+  animation: planetMove 20s linear infinite;
+}
+.planet:nth-child(2) {
+  width: 50px;
+}
+@keyframes planetMove {
+  0% {
+    transform: translateY(calc(var(--i) * 50px)) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(calc(var(--i) * 50px + 20px)) translateX(30px)
+      rotate(15deg);
+  }
+  100% {
+    transform: translateY(calc(var(--i) * 50px)) translateX(0) rotate(0deg);
+  }
+}
+
+/* ESTRELLAS FUGACES */
+.dynamic-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+.dynamic-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(0, 0) rotate(20deg);
+  animation: shootingStar linear forwards;
+}
+@keyframes shootingStar {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(20deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x-end), var(--y-end)) rotate(20deg);
+  }
+}
+
+/* ALIENITOS */
+.aliens {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+.alien {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #0ff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: alienBlink 2s infinite alternate;
+}
+@keyframes alienBlink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* TEXTO */
 .title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 7rem;
   color: #00ffb2;
   text-shadow: 0 0 20px rgba(0, 255, 178, 0.8);
   animation: glowText 3s ease-in-out infinite alternate;
+  margin-bottom: 0;
 }
-
 .subtitle {
-  font-size: 1.8rem;
+  font-size: 3rem;
   letter-spacing: 2px;
   color: #fff;
-  margin-bottom: 1rem;
   animation: fadeIn 2s ease-in;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
-/* ------------------------------
-   UFO + VACA + HAZ DE LUZ
---------------------------------*/
+/* UFO + VACA + HAZ */
 .abduction {
   position: relative;
   width: 200px;
   height: 300px;
-  margin: 3rem auto;
 }
-
 .ufo {
   width: 180px;
   position: absolute;
   top: 0;
   left: 10px;
   filter: drop-shadow(0 0 20px rgba(0, 255, 178, 0.7));
-  animation: float 3s ease-in-out infinite, rotateSlight 6s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite, rotateSlight 6s ease-in-out infinite,
+    ufoZoom 4s ease-in-out infinite alternate;
   transition: filter 0.3s ease;
 }
-
 .ufo:hover {
   filter: drop-shadow(0 0 35px rgba(0, 255, 178, 1));
 }
-
+@keyframes ufoZoom {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
 .beam {
   position: absolute;
   top: 60px;
@@ -100,126 +238,213 @@ body {
   border-right: 70px solid transparent;
   border-bottom: 250px solid rgba(0, 255, 178, 0.25);
   filter: blur(2px);
-  animation: beamPulse 1.8s ease-in-out infinite alternate;
+  animation: beamPulse 1.8s ease-in-out infinite alternate,
+    beamZoom 2s ease-in-out infinite alternate;
 }
-
+@keyframes beamZoom {
+  0% {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(-50%) scaleY(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 0.25;
+  }
+}
+.abduction:hover .beam {
+  animation: beamPulseHover 1s ease-in-out infinite alternate;
+}
 .cow {
   width: 100px;
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  animation: lift 3.2s ease-in-out infinite, tilt 5s ease-in-out infinite;
+  animation: lift 3.2s ease-in-out infinite, tilt 5s ease-in-out infinite,
+    cowZoom 4s ease-in-out infinite alternate;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-
 .cow:hover {
   transform: translateX(-50%) translateY(-5px) rotate(-2deg);
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
 }
 
-/* ------------------------------
-   TEXTO Y BOTÓN
---------------------------------*/
+/* MENSAJE Y BOTÓN */
 .message {
   max-width: 500px;
-  margin: 1.5rem auto;
   font-size: 1.1rem;
   line-height: 1.5;
   color: #e5e5e5;
   animation: fadeInUp 2s ease;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.message {
+  transition: opacity 0.5s ease-in-out;
 }
 
 .home-btn {
   display: inline-block;
-  margin-top: 1rem;
   padding: 0.8rem 1.8rem;
-  color: #0B0C10;
-  background-color: #00FFB2;
+  color: #0b0c10;
+  background-color: #00ffb2;
   border-radius: 30px;
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
   box-shadow: 0 0 15px rgba(0, 255, 178, 0.6);
   transition: all 0.25s ease;
+  animation: buttonPulse 2s infinite alternate;
 }
-
 .home-btn:hover {
   background-color: #00dca1;
   box-shadow: 0 0 30px rgba(0, 255, 178, 0.8);
   transform: translateY(-3px) scale(1.08);
 }
-
 .home-btn:active {
   transform: translateY(1px) scale(0.98);
   box-shadow: 0 0 15px rgba(0, 255, 178, 0.5);
 }
 
-/* ------------------------------
-   FOOTER
---------------------------------*/
+/* FOOTER */
 footer {
   text-align: center;
   padding: 1.5rem 0;
   font-size: 0.9rem;
   color: #888;
+  margin-top: auto;
 }
 
-/* ------------------------------
-   ANIMACIONES
---------------------------------*/
+/* ANIMACIONES GENERALES */
 @keyframes moveStars {
-  from { transform: translateY(0); }
-  to { transform: translateY(-1000px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1000px);
+  }
 }
-
 @keyframes moveTwinkling {
-  from { transform: translateY(0); }
-  to { transform: translateY(-1000px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1000px);
+  }
 }
-
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
-
 @keyframes rotateSlight {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(1deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
 }
-
 @keyframes beamPulse {
-  0% { opacity: 0.2; filter: blur(1px); }
-  100% { opacity: 0.5; filter: blur(3px); }
+  0% {
+    opacity: 0.2;
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0.5;
+    filter: blur(3px);
+  }
 }
-
+@keyframes beamPulseHover {
+  0% {
+    opacity: 0.3;
+    filter: blur(2px) brightness(1);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(4px) brightness(1.3);
+  }
+  100% {
+    opacity: 0.3;
+    filter: blur(2px) brightness(1);
+  }
+}
 @keyframes lift {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -20px); }
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -20px);
+  }
 }
-
 @keyframes tilt {
-  0%, 100% { transform: translate(-50%, 0) rotate(0deg); }
-  50% { transform: translate(-50%, -5px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -5px) rotate(2deg);
+  }
 }
-
+@keyframes cowZoom {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-25px) scale(1.05);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 @keyframes glowText {
-  0% { text-shadow: 0 0 10px rgba(0, 255, 178, 0.4); }
-  100% { text-shadow: 0 0 35px rgba(0, 255, 178, 1); }
+  0% {
+    text-shadow: 0 0 10px rgba(0, 255, 178, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 35px rgba(0, 255, 178, 1);
+  }
+}
+@keyframes buttonPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
 }
 
-/* ------------------------------
-   RESPONSIVIDAD
---------------------------------*/
+/* RESPONSIVIDAD */
 @media (max-width: 600px) {
   .title {
     font-size: 4.5rem;
@@ -243,66 +468,4 @@ footer {
   .cow {
     width: 80px;
   }
-}
-
-/* ------------------------------
-   ESTRELLAS FUGACES
---------------------------------*/
-.stars::after {
-  content: '';
-  position: absolute;
-  width: 2px;
-  height: 80px;
-  background: linear-gradient(45deg, #fff, rgba(255,255,255,0));
-  opacity: 0;
-  top: 0;
-  left: 0;
-  animation: shootingStar 2s linear infinite;
-}
-
-@keyframes shootingStar {
-  0% {
-    transform: translate(-100vw, -50vh) rotate(45deg);
-    opacity: 0;
-  }
-  5% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(100vw, 50vh) rotate(45deg);
-    opacity: 0;
-  }
-}
-
-/* Se pueden duplicar con delays para más estrellas fugaces */
-.stars::before {
-  content: '';
-  position: absolute;
-  width: 2px;
-  height: 60px;
-  background: linear-gradient(45deg, #fff, rgba(255,255,255,0));
-  opacity: 0;
-  top: 0;
-  left: 0;
-  animation: shootingStar2 3.5s linear infinite;
-  animation-delay: 1s;
-}
-
-@keyframes shootingStar2 {
-  0% { transform: translate(-120vw, -40vh) rotate(30deg); opacity: 0; }
-  5% { opacity: 1; }
-  100% { transform: translate(120vw, 40vh) rotate(30deg); opacity: 0; }
-}
-
-/* ------------------------------
-   HAZ DE LUZ INTERACTIVO
---------------------------------*/
-.abduction:hover .beam {
-  animation: beamPulseHover 1s ease-in-out infinite alternate;
-}
-
-@keyframes beamPulseHover {
-  0% { opacity: 0.3; filter: blur(2px) brightness(1); }
-  50% { opacity: 0.7; filter: blur(4px) brightness(1.3); }
-  100% { opacity: 0.3; filter: blur(2px) brightness(1); }
 }
