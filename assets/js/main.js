@@ -35,20 +35,32 @@ const planets = [];
 
 function createPlanet(index) {
   const planet = document.createElement("img");
-  planet.src =
-    "https://raw.githubusercontent.com/ruvebal/web-atelier-udit/main/lessons/en/404/hackathon/planet.png";
+
+  // 🌍 Usa tus imágenes locales dentro de assets/img/
+  const planetImages = [
+   "../assets/img/Jupiter.PNG",
+   "../assets/img/Mercurio.PNG",
+   "../assets/img/Neptuno.PNG",
+   "../assets/img/Pluton.PNG",
+   "../assets/img/Urano.PNG",
+   "../assets/img/Venus.PNG",
+   "../assets/img/Saturno.PNG",
+  ];
+
+  // Selecciona una imagen aleatoria
+  planet.src = planetImages[Math.floor(Math.random() * planetImages.length)];
   planet.classList.add("planet");
 
-  // posición inicial aleatoria
+  // Posición inicial aleatoria
   planet.style.left = Math.random() * window.innerWidth + "px";
   planet.style.top = Math.random() * window.innerHeight + "px";
 
-  // velocidad y dirección aleatoria
-  const speedX = Math.random() * 0.3 + 0.1; // px por frame
+  // Velocidad y dirección aleatoria
+  const speedX = Math.random() * 0.3 + 0.1;
   const speedY = Math.random() * 0.3 + 0.1;
 
-  // tamaño aleatorio
-  const size = 30 + Math.random() * 50;
+  // Tamaño aleatorio
+  const size = 30 + Math.random() * 70;
   planet.style.width = size + "px";
 
   planetsContainer.appendChild(planet);
@@ -62,15 +74,16 @@ function createPlanet(index) {
   });
 }
 
-// Crear 7 planetas
+// Crea 7 planetas
 for (let i = 0; i < 7; i++) createPlanet(i);
 
-// Animar planetas
+// Animación de movimiento continuo
 function animatePlanets() {
   planets.forEach((p) => {
     p.x += p.speedX;
     p.y += p.speedY;
 
+    // Reaparece en el borde contrario
     if (p.x > window.innerWidth) p.x = -parseFloat(p.el.style.width);
     if (p.y > window.innerHeight) p.y = -parseFloat(p.el.style.height);
 

@@ -16,10 +16,10 @@ The user lands on a missing page. In the darkness of the night, a UFO appears an
 Displayed message: “404: Page abducted. Looks like the aliens took it with them!”  
 
 **Core Message:**  
-404 – Page Abducted  
+404 – Mars Abducted  
 
 **Call to Action:**  
-"Beam me back home 👽" – a button linking back to the main site.
+"Beam me back home" – a button linking back to the main site.
 
 ## Technologies Used
 

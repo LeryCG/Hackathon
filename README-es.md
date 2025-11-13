@@ -16,7 +16,7 @@ El usuario aterriza en una página inexistente. En la oscuridad de la noche, apa
 Mensaje mostrado: “404: Página abducida. Parece que los alienígenas se la han llevado.”  
 
 **Mensaje Principal:**  
-404 – Página Abducida  
+404 – Marte Abducida  
 
 **Llamada a la Acción:**  
 "Beam me back home" – botón que redirige al sitio principal.
