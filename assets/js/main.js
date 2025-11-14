@@ -38,13 +38,13 @@ function createPlanet(index) {
 
   // 🌍 Usa tus imágenes locales dentro de assets/img/
   const planetImages = [
-   "../assets/img/Jupiter.PNG",
-   "../assets/img/Mercurio.PNG",
-   "../assets/img/Neptuno.PNG",
-   "../assets/img/Pluton.PNG",
-   "../assets/img/Urano.PNG",
-   "../assets/img/Venus.PNG",
-   "../assets/img/Saturno.PNG",
+   "assets/img/Jupiter.PNG",
+   "assets/img/Mercurio.PNG",
+   "assets/img/Neptuno.PNG",
+   "assets/img/Pluton.PNG",
+   "assets/img/Urano.PNG",
+   "assets/img/Venus.PNG",
+   "assets/img/Saturno.PNG",
   ];
 
   // Selecciona una imagen aleatoria
