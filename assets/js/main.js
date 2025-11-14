@@ -36,7 +36,6 @@ const planets = [];
 function createPlanet(index) {
   const planet = document.createElement("img");
 
-  // 🌍 Usa tus imágenes locales dentro de assets/img/
   const planetImages = [
    "assets/img/Jupiter.PNG",
    "assets/img/Mercurio.PNG",
